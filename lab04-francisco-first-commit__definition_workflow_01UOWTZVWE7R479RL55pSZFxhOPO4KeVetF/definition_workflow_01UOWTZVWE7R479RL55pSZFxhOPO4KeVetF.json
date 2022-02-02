@@ -1,0 +1,55 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01UOWTZVWE7R479RL55pSZFxhOPO4KeVetF",
+    "name": "Training_Lab04_Francisco",
+    "title": "Training_Lab04_Francisco",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Training_Lab04_Francisco",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01UOWXG64VTGH2mwK1MVKgV0NOsPvzQDoW6",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep",
+          "skip_execution": false,
+          "sleep_interval": 30
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01UN8VB5RDY7Q6OXBFr0xcX4KN6DdxImlhL"
+    ]
+  },
+  "categories": {
+    "category_01UN8VB5RDY7Q6OXBFr0xcX4KN6DdxImlhL": {
+      "unique_name": "category_01UN8VB5RDY7Q6OXBFr0xcX4KN6DdxImlhL",
+      "name": "Francisco-Training",
+      "title": "Francisco-Training",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Francisco Adum Training",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
