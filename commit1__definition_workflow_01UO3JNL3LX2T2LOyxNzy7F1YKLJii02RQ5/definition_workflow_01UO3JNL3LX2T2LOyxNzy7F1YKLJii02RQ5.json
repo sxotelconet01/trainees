@@ -1,0 +1,233 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01UO3JNL3LX2T2LOyxNzy7F1YKLJii02RQ5",
+    "name": "Master_zully",
+    "title": "Master_zully",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "results",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UO4BP16WUR70EHxrcEqdYmOimmp5pCdI7",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "name",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UO3RQT72OJT5jRcRBt1GUAjpBbuQt3pk5",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Master_zully",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01UO1ZJGUP3R41skEF7nN6rXVV1jUmCI7iU",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01UO3R2MM3X3B4dHTWJtv4rQsyIjhxz5adD",
+        "name": "Lab2_Espinoza",
+        "title": "Lab2_Espinoza",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "display_name": "Lab2_Espinoza",
+          "input": {
+            "variable_workflow_01UO20PWO4CEP6YJfRyznp0jZFc5iaIWLi3": "users"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01UO1ZJGUP3R41skEF7nN6rXVV1jUmCI7iU",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01UO1ZNKPMUH615vV5VOqdZDX3c6IjQj2AP"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01UO3S3G8CBZY6AoGIsEWrpgH8R9rtJlWuw",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_01UO3R2MM3X3B4dHTWJtv4rQsyIjhxz5adD.output.variable_workflow_01UO2155X8FM11OWRhKiIYyNSneXSoQZi3Q$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[?(@.username==\"\u003cinput name\u003e\")]",
+              "jsonpath_query_name": "name",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01UO3X1HPK0JK6QnH9iw01UFvF1SwYJxcJu",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Execute Python Script",
+          "script": "import json\nimport sys\n\ntry:\n    block = json.loads(sys.argv[1])\n    if block['name']:\n        output = block['name']\n    else:\n        output = \"No Name Found.\"\nexcept:\n    output = \"No Name Found\"",
+          "script_arguments": [
+            "$activity.definition_activity_01UO3S3G8CBZY6AoGIsEWrpgH8R9rtJlWuw.output.jsonpath_queries.name$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "output",
+              "script_query_name": "name_of_person",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01UO46LRVUJE44bRbRa6Hjt8zKoO3zz6Tzj",
+        "name": "Condition Block",
+        "title": "If found name",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If found name",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01UO46LSOOGBT6o4julgNxuJ7SNp82XmO12",
+            "name": "Condition Branch",
+            "title": "THEN",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01UO3S3G8CBZY6AoGIsEWrpgH8R9rtJlWuw.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "THEN",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01UO4BY9W1UH32w2242wg8gm5qDlI0lUMqv",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01UO46LTHC9GO6c19GR5mxB5zWITcyn3UmK",
+            "name": "Condition Branch",
+            "title": "ELSE",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_01UO3S3G8CBZY6AoGIsEWrpgH8R9rtJlWuw.output.succeeded$",
+                "operator": "eq",
+                "right_operand": false
+              },
+              "continue_on_failure": false,
+              "display_name": "ELSE",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01UO1ZJGUP3R41skEF7nN6rXVV1jUmCI7iU": {
+      "unique_name": "definition_target_01UO1ZJGUP3R41skEF7nN6rXVV1jUmCI7iU",
+      "name": "test_zully",
+      "title": "test_zully",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01UO1XRCZRV2I4sOqRivul7YG3dVVQMGZX2",
+        "disable_certificate_validation": true,
+        "display_name": "test_zully",
+        "host": "jsonplaceholder.typicode.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01UO1XRCZRV2I4sOqRivul7YG3dVVQMGZX2": {
+      "unique_name": "definition_runtime_user_01UO1XRCZRV2I4sOqRivul7YG3dVVQMGZX2",
+      "name": "test_zully",
+      "title": "test_zully",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "test_zully"
+      }
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01UO1ZNKPMUH615vV5VOqdZDX3c6IjQj2AP"
+  ]
+}
