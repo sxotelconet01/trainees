@@ -10,19 +10,6 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
-          "scope": "input",
-          "name": "name",
-          "type": "datatype.string",
-          "is_required": true,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01UO1U4W14QPM4JsrfgRof1QiJHvUldeKZG",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
           "scope": "local",
           "name": "results",
           "type": "datatype.string",
@@ -30,6 +17,19 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01UO3SR8VGR7Z51yzt3S5aWxRncFHM049yR",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "name",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UO1U4W14QPM4JsrfgRof1QiJHvUldeKZG",
         "object_type": "variable_workflow"
       }
     ],
@@ -43,8 +43,8 @@
         "target_default": true
       },
       "target": {
-        "target_type": "web-service.endpoint",
-        "target_id": "definition_target_01UNZW72PKHZW4MW60i6zaEo7lrdNJzRqsw",
+        "target_type": "email.pop3_endpoint",
+        "target_id": "definition_target_01UOX6GOEKAD90fW8dvgvoq5CJWkmGLbstv",
         "execute_on_workflow_target": true
       }
     },
@@ -204,7 +204,7 @@
                         "override_workflow_target": true,
                         "target_id": "definition_target_01UKHULBK43IP6JxO7OrPqD1w9Qb5JuHCCn"
                       },
-                      "to": "wayala@telconet.cloud"
+                      "to": "wayala@telconet.ec"
                     },
                     "object_type": "definition_activity"
                   }
@@ -324,6 +324,19 @@
     ]
   },
   "triggers": {
+    "triggerevent_01UOXAT7VGOZX4NGLU7kfCEHtD8YxDzGbtr": {
+      "workflow_id": "definition_workflow_01UO1QF9A7EA06vigCzLphYODZ6DlCM5OKY",
+      "name": "William Trigger",
+      "title": "",
+      "lowercase_name": "event.william_trigger",
+      "type": "event",
+      "base_type": "trigger",
+      "ref_id": "event_01UOX9OARY3R65RETZaR4DLlZeFVr95TmSR",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerevent_01UOXAT7VGOZX4NGLU7kfCEHtD8YxDzGbtr",
+      "object_type": "triggerevent"
+    },
     "triggerschedule_01UOVK5C009DS4ZtnEWuLqeSPncwG9L5aIf": {
       "workflow_id": "definition_workflow_01UO1QF9A7EA06vigCzLphYODZ6DlCM5OKY",
       "name": "every minute",
@@ -337,6 +350,31 @@
       "disabled": false,
       "unique_name": "triggerschedule_01UOVK5C009DS4ZtnEWuLqeSPncwG9L5aIf",
       "object_type": "triggerschedule"
+    }
+  },
+  "events": {
+    "event_01UOX9OARY3R65RETZaR4DLlZeFVr95TmSR": {
+      "name": "email William",
+      "title": "email William",
+      "type": "email.event",
+      "base_type": "event",
+      "object_type": "event",
+      "target_id": "definition_target_01UOX6GOEKAD90fW8dvgvoq5CJWkmGLbstv",
+      "webhook_id": "",
+      "version": "1.0.0",
+      "properties": {
+        "action": "read",
+        "conditions": {
+          "left_operand": "$output.sender$",
+          "operator": "mw",
+          "right_operand": "sxo"
+        },
+        "download_attachments": true,
+        "folder": "INBOX",
+        "target_id": "definition_target_01UOX6GOEKAD90fW8dvgvoq5CJWkmGLbstv",
+        "title": "email William"
+      },
+      "unique_name": "event_01UOX9OARY3R65RETZaR4DLlZeFVr95TmSR"
     }
   },
   "schedules": {
@@ -410,6 +448,24 @@
         "host": "35.227.122.165",
         "port": 22
       }
+    },
+    "definition_target_01UOX6GOEKAD90fW8dvgvoq5CJWkmGLbstv": {
+      "unique_name": "definition_target_01UOX6GOEKAD90fW8dvgvoq5CJWkmGLbstv",
+      "name": "POP3 William",
+      "title": "POP3 William",
+      "type": "email.pop3_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01UOX38VC8EBW6Yh9sJEE1zorKFUGVdEgzl",
+        "display_name": "POP3 William",
+        "ignore_certificate_errors": true,
+        "polling_interval": 30,
+        "port": 995,
+        "protocol": "POP3",
+        "server": "pop.gmail.com",
+        "tls_enabled": true
+      }
     }
   },
   "runtime_users": {
@@ -453,6 +509,19 @@
         "basic_username": "*****",
         "description": "test/test",
         "display_name": "william"
+      }
+    },
+    "definition_runtime_user_01UOX38VC8EBW6Yh9sJEE1zorKFUGVdEgzl": {
+      "unique_name": "definition_runtime_user_01UOX38VC8EBW6Yh9sJEE1zorKFUGVdEgzl",
+      "name": "William",
+      "title": "William",
+      "type": "runtime_user.email_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "William",
+        "password": "*****",
+        "sender": "*****"
       }
     }
   },
