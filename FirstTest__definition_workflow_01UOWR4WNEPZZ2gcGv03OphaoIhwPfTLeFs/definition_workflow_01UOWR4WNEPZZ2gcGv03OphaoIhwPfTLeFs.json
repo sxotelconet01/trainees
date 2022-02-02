@@ -1,0 +1,73 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01UOWR4WNEPZZ2gcGv03OphaoIhwPfTLeFs",
+    "name": "Lab04-jreyesr",
+    "title": "Lab04-jreyesr",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "output_message",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UOWS8CSNRC27cBm3ahkFAqUAdQDbT9RLC",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Lab04-jreyesr",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01UOWS3DONVY31Zm0dPTi0jvG8l9tussJZl",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01UOWR4WNEPZZ2gcGv03OphaoIhwPfTLeFs.output.variable_workflow_01UOWS8CSNRC27cBm3ahkFAqUAdQDbT9RLC$",
+              "variable_value_new": "SUCCESS"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01UN8OVU4QLPT5TD1KJhpqYHgcol08J3b9J"
+    ]
+  },
+  "categories": {
+    "category_01UN8OVU4QLPT5TD1KJhpqYHgcol08J3b9J": {
+      "unique_name": "category_01UN8OVU4QLPT5TD1KJhpqYHgcol08J3b9J",
+      "name": "jreyesr-Training",
+      "title": "jreyesr-Training",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  }
+}
