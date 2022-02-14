@@ -7,15 +7,15 @@
     "base_type": "workflow",
     "variables": [
       {
-        "schema_id": "tabletype_01UZ3TLMKLYOF6if0n03qG0WOn1wZp4T5TG",
+        "schema_id": "tabletype_01DN4F6CMYENF1DUeA8prYnelZCHowVJ8kX",
         "properties": {
-          "scope": "local",
-          "name": "Table_IOC_to_analyze",
+          "scope": "input",
+          "name": "tgdnwj",
           "type": "datatype.table",
           "is_required": false,
           "is_invisible": false
         },
-        "unique_name": "variable_workflow_01UZ3TVXJSCQ73EnE3kbL0ljj7oA5Su17D9",
+        "unique_name": "variable_workflow_01UT5UKPOEY4U5iIoGHaAAcWZFqtQP2eqpB",
         "object_type": "variable_workflow"
       },
       {
@@ -31,6 +31,18 @@
         "object_type": "variable_workflow"
       },
       {
+        "schema_id": "tabletype_01UZ3TLMKLYOF6if0n03qG0WOn1wZp4T5TG",
+        "properties": {
+          "scope": "local",
+          "name": "Table_IOC_to_analyze",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UZ3TVXJSCQ73EnE3kbL0ljj7oA5Su17D9",
+        "object_type": "variable_workflow"
+      },
+      {
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
@@ -41,18 +53,6 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_01UZ3F29X2M7S3LWlhojDPAFlVJkW7xQK53",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "tabletype_01DN4F6CMYENF1DUeA8prYnelZCHowVJ8kX",
-        "properties": {
-          "scope": "input",
-          "name": "tgdnwj",
-          "type": "datatype.table",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_01UT5UKPOEY4U5iIoGHaAAcWZFqtQP2eqpB",
         "object_type": "variable_workflow"
       }
     ],
