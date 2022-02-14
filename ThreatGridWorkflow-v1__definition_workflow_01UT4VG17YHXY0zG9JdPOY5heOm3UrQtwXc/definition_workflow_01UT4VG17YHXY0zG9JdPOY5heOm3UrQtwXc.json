@@ -205,13 +205,13 @@
       "display_name": "ThreatGridAnalysis",
       "columns": [
         {
-          "name": "name",
-          "title": "Indicator Name",
+          "name": "threat",
+          "title": "Threat Score",
           "type": "string"
         },
         {
-          "name": "threat",
-          "title": "Threat Score",
+          "name": "name",
+          "title": "Indicator Name",
           "type": "string"
         }
       ],
@@ -240,14 +240,14 @@
       "columns": [
         {
           "is_required": true,
-          "name": "ioc_type",
-          "title": "ioc_type",
+          "name": "ioc_value",
+          "title": "ioc_value",
           "type": "string"
         },
         {
           "is_required": true,
-          "name": "ioc_value",
-          "title": "ioc_value",
+          "name": "ioc_type",
+          "title": "ioc_type",
           "type": "string"
         }
       ],
