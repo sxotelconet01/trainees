@@ -1,0 +1,261 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01UT4VG17YHXY0zG9JdPOY5heOm3UrQtwXc",
+    "name": "ThreatGrid Workflow -v1",
+    "title": "ThreatGrid Workflow -v1",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "tabletype_01DN4F6CMYENF1DUeA8prYnelZCHowVJ8kX",
+        "properties": {
+          "scope": "input",
+          "name": "tgdnwj",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UT5UKPOEY4U5iIoGHaAAcWZFqtQP2eqpB",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01C9HJ1YK7LEQ6Qh0nskvPTH4iTpb3ycLAi",
+        "properties": {
+          "scope": "output",
+          "name": "tgawj",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UT5TZ5S0VY30NkDpLIeX6sace4CFXKWXc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01UZ3TLMKLYOF6if0n03qG0WOn1wZp4T5TG",
+        "properties": {
+          "scope": "local",
+          "name": "Table_IOC_to_analyze",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UZ3TVXJSCQ73EnE3kbL0ljj7oA5Su17D9",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "Result_from_threatGrid",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01UZ3F29X2M7S3LWlhojDPAFlVJkW7xQK53",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "ThreatGrid Workflow -v1",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01H8J2JO8X4BD7Q1DFzQsQn4rrIIDMceWsV",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01UT5L3ZQ7E3X7NEVK9npGbFc0gduIkK97m",
+        "name": "Secure Malware Analytics - Submit URL",
+        "title": "Secure Malware Analytics - Submit URL",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Secure Malware Analytics - Submit URL",
+          "input": {
+            "variable_workflow_01PP78YVQL5PH0SroKbcStsP8tTzMD4VVxO": "",
+            "variable_workflow_01PP78YVQLACW627A2oTA7Br1nBYufQEtkY": true,
+            "variable_workflow_01PP78YVQLC4K2DLxGE2PQLKh5QPubd4lhW": "",
+            "variable_workflow_01PP78YVQLDRB0ldfcZbpgUj4Uhw0RdwWzq": 5,
+            "variable_workflow_01PP78YVQLINT4UiRyREjj9EqUiD4v7n5fu": true,
+            "variable_workflow_01PP78YVQLK1045YAHrQBaZWCQHmH1uwzwX": "$workflow.definition_workflow_01UT4VG17YHXY0zG9JdPOY5heOm3UrQtwXc.local.variable_workflow_01UZ3TVXJSCQ73EnE3kbL0ljj7oA5Su17D9[0].ioc_value$",
+            "variable_workflow_01PP78YVQLL6W2OruzCBYvANFECP22jB7YD": "default",
+            "variable_workflow_01PP78YVQLMCJ2cxzg6yVKC2i3ZMIsEHFeL": "$global.variable_01GNGQMVYYYN94rQDZBgeCuQlQogAUEhpQ6.global.variable_01GNGQMVYYYN94rQDZBgeCuQlQogAUEhpQ6$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "target_type": "web-service.endpoint",
+            "use_workflow_target": true
+          },
+          "workflow_id": "definition_workflow_01PP78YVWMXKI3jcrOGYocGMM3VaophGkkJ"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01UZ3M7TT0D861HYWx45jHkWF4HmGRtJ1KN",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Execute Python Script",
+          "script": "import sys\nimport json\n\ndata = json.loads(sys.argv[1])\nthreat_score = data[\"threat\"][\"threat_score\"]",
+          "script_arguments": [
+            "$activity.definition_activity_01UT5L3ZQ7E3X7NEVK9npGbFc0gduIkK97m.output.variable_workflow_01PP78YVQLNKM65DcBSPIIm6PsIhw9g37XO$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "threat_score",
+              "script_query_name": "threat_score",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01UZ2WJ8OUF685Jm1uiufivShIbqOELv5ih",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01UT4VG17YHXY0zG9JdPOY5heOm3UrQtwXc.local.variable_workflow_01UZ3F29X2M7S3LWlhojDPAFlVJkW7xQK53$",
+              "variable_value_new": "$activity.definition_activity_01UZ3M7TT0D861HYWx45jHkWF4HmGRtJ1KN.output.script_queries.threat_score$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01UNA9BTDT4T15KtN2G75WAgCnCOK6gUtFm"
+    ]
+  },
+  "categories": {
+    "category_01UNA9BTDT4T15KtN2G75WAgCnCOK6gUtFm": {
+      "unique_name": "category_01UNA9BTDT4T15KtN2G75WAgCnCOK6gUtFm",
+      "name": "William-Training",
+      "title": "William-Training",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "targets": {
+    "definition_target_01H8J2JO8X4BD7Q1DFzQsQn4rrIIDMceWsV": {
+      "unique_name": "definition_target_01H8J2JO8X4BD7Q1DFzQsQn4rrIIDMceWsV",
+      "name": "ThreatGrid_Target",
+      "title": "ThreatGrid_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "ThreatGrid_Target",
+        "disable_certificate_validation": false,
+        "display_name": "ThreatGrid_Target",
+        "host": "panacea.threatgrid.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "variables": {
+    "variable_01GNGQMVYYYN94rQDZBgeCuQlQogAUEhpQ6": {
+      "unique_name": "variable_01GNGQMVYYYN94rQDZBgeCuQlQogAUEhpQ6",
+      "properties": {
+        "value": "*****",
+        "scope": "global",
+        "name": "Threat Grid API Key",
+        "type": "datatype.secure_string",
+        "description": "TGAWJ",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01C9HJ1YK7LEQ6Qh0nskvPTH4iTpb3ycLAi": {
+      "unique_name": "tabletype_01C9HJ1YK7LEQ6Qh0nskvPTH4iTpb3ycLAi",
+      "data_type": "datatype.tabletype",
+      "display_name": "ThreatGridAnalysis",
+      "columns": [
+        {
+          "name": "name",
+          "title": "Indicator Name",
+          "type": "string"
+        },
+        {
+          "name": "threat",
+          "title": "Threat Score",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    },
+    "tabletype_01DN4F6CMYENF1DUeA8prYnelZCHowVJ8kX": {
+      "unique_name": "tabletype_01DN4F6CMYENF1DUeA8prYnelZCHowVJ8kX",
+      "data_type": "datatype.tabletype",
+      "display_name": "Threat Grid - Domain Names for a Sample",
+      "description": "This table holds Domain names contacted to a Sample",
+      "columns": [
+        {
+          "name": "domain_name",
+          "title": "domain_name",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    },
+    "tabletype_01UZ3TLMKLYOF6if0n03qG0WOn1wZp4T5TG": {
+      "unique_name": "tabletype_01UZ3TLMKLYOF6if0n03qG0WOn1wZp4T5TG",
+      "data_type": "datatype.tabletype",
+      "display_name": "Table_IOC_to_analyze",
+      "columns": [
+        {
+          "is_required": true,
+          "name": "ioc_type",
+          "title": "ioc_type",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "name": "ioc_value",
+          "title": "ioc_value",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_01PP78YVWMXKI3jcrOGYocGMM3VaophGkkJ"
+  ]
+}
